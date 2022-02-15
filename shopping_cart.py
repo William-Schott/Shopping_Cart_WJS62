@@ -25,9 +25,6 @@ products = [
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
 
-def to_usd(my_price):
-   
-    return f"${my_price:,.2f}" #> $12,000.71
 
 ##A grocery store name of your choice
 store_name = "Welcome to Kroger OTR"
@@ -64,7 +61,6 @@ for selcted_id in selected_ids:
     matching_product = matching_products[0]
     subtotal = subtotal + matching_product["price"]
     print("SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"])) 
-
 print("TOTAL PRICE: " + str(subtotal))
 
 
