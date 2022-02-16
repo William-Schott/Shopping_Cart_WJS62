@@ -32,6 +32,7 @@ print(store_name)
 #A grocery store phone number and/or website URL and/or address of choice
 
 store_phone_number = "513-429-1968"
+print(store_phone_number)
 #The date and time of the beginning of the checkout process, formatted in a human-friendly way (e.g. 2020-02-07 03:54 PM)
 from datetime import datetime
 now = datetime.now()
@@ -58,6 +59,7 @@ while True:
 #print(selected_ids)
 for selcted_id in selected_ids:
     matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
+    print(matching_products)
     matching_product = matching_products[0]
     subtotal = subtotal + matching_product["price"]
     print("SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"])) 
