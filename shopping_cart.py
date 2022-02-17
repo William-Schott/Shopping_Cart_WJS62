@@ -57,24 +57,25 @@ while True:
         selected_ids.append(selected_id)
 # Info Output
 #print(selected_ids)
-for selcted_id in selected_ids:
+for selected_id in selected_ids:
     matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
     print(matching_products)
     matching_product = matching_products[0]
     subtotal = subtotal + matching_product["price"]
     print("SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"])) 
-print("TOTAL PRICE: " + str(subtotal))
+print("Subtotal: " + str(subtotal))
 
 
 #The amount of tax owed (e.g. $1.70), calculated by multiplying the total cost by a New York City sales tax rate of 8.75% (for the purposes of this project, groceries are not exempt from sales tax)
-tax_owed = str(subtotal) * 0.0875
-print(tax_owed)
+tax_owed = float(subtotal) * 0.0875
+print("Tax owed: " + str(round(tax_owed,2)))
+#print(type(tax_owed))
 #the total amount owed, formatted as US dollars and cents (e.g. $21.17), calculated by adding together the amount of tax owed plus the total cost of all shopping cart items
-total_price = str(tax_owed) + str(subtotal)
-print(str(total_price))
+total_price = tax_owed + subtotal
+print("Total Price: " + str(round(total_price,2)))
 
 #A friendly message thanking the customer and/or encouraging the customer to shop again
-if selcted_id == "DONE":
+if selected_id == "DONE":
     print("Thank you for vistiting Kroger OTR, Please come again!")
 
 #: write some Python code here to produce the desired output
