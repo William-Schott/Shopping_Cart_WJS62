@@ -51,6 +51,7 @@ selected_ids = []
 while True:
     selected_id = input("Please input a product identifier: ")
     if selected_id == "DONE":
+        print("Thank you for vistiting Kroger OTR, Please come again!")
         break
     else:
           
@@ -75,8 +76,8 @@ total_price = tax_owed + subtotal
 print("Total Price: " + str(round(total_price,2)))
 
 #A friendly message thanking the customer and/or encouraging the customer to shop again
-if selected_id == "DONE":
-    print("Thank you for vistiting Kroger OTR, Please come again!")
+
+    
 
 #: write some Python code here to produce the desired output
 
