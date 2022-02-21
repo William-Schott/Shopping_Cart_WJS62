@@ -49,10 +49,13 @@ selected_ids = []
 
 
 while True:
-    selected_id = input("Please input a product identifier: ")
-    if selected_id == "DONE":
-        print("Thank you for vistiting Kroger OTR, Please come again!")
-        break
+    try:
+        selected_id = input("Please input a product identifier: ")
+        if selected_id == "DONE":
+            print("Thank you for vistiting Kroger OTR, Please come again!")
+            break
+    except IndexError:
+        print("Incorrect product identifier, please try again.")
     else:
           
         selected_ids.append(selected_id)
@@ -62,18 +65,18 @@ for selected_id in selected_ids:
     matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
     print(matching_products)
     matching_product = matching_products[0]
-    subtotal = subtotal + matching_product["price"]
+    subtotal = float(subtotal + matching_product["price"])
     print("SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"])) 
-print("Subtotal: " + str(subtotal))
+print(to_usd.format("Subtotal: " + str(subtotal)))
 
 
 #The amount of tax owed (e.g. $1.70), calculated by multiplying the total cost by a New York City sales tax rate of 8.75% (for the purposes of this project, groceries are not exempt from sales tax)
 tax_owed = float(subtotal) * 0.0875
-print("Tax owed: " + str(round(tax_owed,2)))
+print(to_usd.format("Tax owed: " + str(round(tax_owed,2))))
 #print(type(tax_owed))
 #the total amount owed, formatted as US dollars and cents (e.g. $21.17), calculated by adding together the amount of tax owed plus the total cost of all shopping cart items
-total_price = tax_owed + subtotal
-print("Total Price: " + str(round(total_price,2)))
+total_price = float(tax_owed + subtotal)
+print(to_usd.format("Total Price: " + int(round(total_price,2))))
 
 #A friendly message thanking the customer and/or encouraging the customer to shop again
 
