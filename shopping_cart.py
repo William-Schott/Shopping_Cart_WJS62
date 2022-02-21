@@ -1,3 +1,4 @@
+from cgitb import text
 from os import environ
 
 
@@ -28,16 +29,17 @@ products = [
 
 ##A grocery store name of your choice
 store_name = "Welcome to Kroger OTR"
-print(store_name)
+
 #A grocery store phone number and/or website URL and/or address of choice
 
-store_phone_number = "513-429-1968"
-print(store_phone_number)
+store_phone_number = "(513) 263-5900"
+store_url = "https://www.kroger.com/stores/details/014/00513"
+
 #The date and time of the beginning of the checkout process, formatted in a human-friendly way (e.g. 2020-02-07 03:54 PM)
 from datetime import datetime
 now = datetime.now()
 dt_string = now.strftime("%Y/%m/%d %H:%M %p")
-print("Today's date and time: ", dt_string)
+
 #The name and price of each shopping cart item, price being formatted as US dollars and cents (e.g. $3.50, etc.)
 def to_usd(my_price):
    
@@ -49,35 +51,48 @@ selected_ids = []
 
 
 while True:
-    try:
-        selected_id = input("Please input a product identifier: ")
-        if selected_id == "DONE":
-            print("Thank you for vistiting Kroger OTR, Please come again!")
-            break
-    except IndexError:
-        print("Incorrect product identifier, please try again.")
+
+    selected_id = input("Please input a product identifier: ")
+    
+    if selected_id == "DONE" or selected_id == "done":
+        
+        break
+    elif int(selected_id) > len(products) or int(selected_id) <= 0:
+        print("Invalid product id, please try again.")
     else:
           
         selected_ids.append(selected_id)
 # Info Output
-#print(selected_ids)
+print("--------------------------------")
+print(store_name)
+print(store_phone_number)
+print(store_url)
+print("Today's checkout date and time: ", dt_string)
+print("--------------------------------")
+
 for selected_id in selected_ids:
     matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
-    print(matching_products)
+   
     matching_product = matching_products[0]
-    subtotal = float(subtotal + matching_product["price"])
+    subtotal = int(subtotal + matching_product["price"])
     print("SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"])) 
-print(to_usd.format("Subtotal: " + str(subtotal)))
-
+    print("--------------------------------")
+print(f"Subtotal: {to_usd(subtotal)}")
+print("--------------------------------")
 
 #The amount of tax owed (e.g. $1.70), calculated by multiplying the total cost by a New York City sales tax rate of 8.75% (for the purposes of this project, groceries are not exempt from sales tax)
-tax_owed = float(subtotal) * 0.0875
-print(to_usd.format("Tax owed: " + str(round(tax_owed,2))))
+tax_owed = int(subtotal) * 0.0875
+print(f"Tax Owed: {to_usd(tax_owed)}")
+print("--------------------------------")
+
 #print(type(tax_owed))
 #the total amount owed, formatted as US dollars and cents (e.g. $21.17), calculated by adding together the amount of tax owed plus the total cost of all shopping cart items
-total_price = float(tax_owed + subtotal)
-print(to_usd.format("Total Price: " + int(round(total_price,2))))
-
+total_price = int(tax_owed + subtotal)
+print(f"Total Price: {to_usd(total_price)}")
+print("--------------------------------")
+print("Thank you for vistiting Kroger OTR, Please come again!")
+print("--------------------------------")
+#Print(f’Total price: {to_usd(totalprice)}’)
 #A friendly message thanking the customer and/or encouraging the customer to shop again
 
     
